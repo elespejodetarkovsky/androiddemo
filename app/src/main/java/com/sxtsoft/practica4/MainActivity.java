@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         fecha = new Date();
-        Log.d("INFO", "ON PAUSE " + fecha);
+        Log.d("INFO", "ON PAUSE valor " + fecha);
     }
 
     @Override
