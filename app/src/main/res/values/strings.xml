@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">practica4</string>
+    <string name="apptext">Barry Lyndon</string>
+    <string name="botonizquierdo">me gusta</string>
+    <string name="Descripcion">Escena clásica Barry Lyndon</string>
+    <string name="botonDerecho">No Me Gusta</string>
+    <string name="textViewTiempo">0 segundos</string>
+</resources>
