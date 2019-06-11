@@ -62,8 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/buttonPor"
-            tools:text="@string/buttonPor" />
+            android:text="@string/buttonPor" />
     </LinearLayout>
 
     <LinearLayout
@@ -141,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Button"
+            android:text="@string/buttonMinus"
             tools:text="@string/buttonMinus" />
 
     </LinearLayout>
@@ -170,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Button"
+                    android:text="@string/button1"
                     tools:text="@string/button1" />
 
                 <Button
@@ -178,7 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Button"
+                    android:text="@string/button2"
                     tools:text="@string/button2" />
 
                 <Button
@@ -186,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Button"
+                    android:text="@string/button3"
                     tools:text="@string/button3" />
             </LinearLayout>
 
@@ -209,7 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Button"
+                    android:text="@string/button0"
                     tools:text="@string/button0" />
 
                 <Button
@@ -217,7 +216,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Button"
+                    android:text="@string/buttonPoint"
                     tools:text="@string/buttonPoint" />
             </LinearLayout>
         </LinearLayout>
@@ -232,7 +231,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/holo_blue_dark"
-                android:text="Button"
+                android:text="@string/buttonIgual"
                 tools:text="@string/buttonIgual" />
         </LinearLayout>
 
