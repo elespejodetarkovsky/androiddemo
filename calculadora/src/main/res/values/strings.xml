@@ -18,6 +18,8 @@
     <string name="buttonDel">CE</string>
     <string name="buttonPoint">.</string>
     <string name="viewResult">0</string>
+    <string name="buttonON">ON</string>
+    <string name="buttonPorcentual">%</string>
 
 
 </resources>
