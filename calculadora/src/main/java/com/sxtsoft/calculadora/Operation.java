@@ -1,34 +1,41 @@
 package com.sxtsoft.calculadora;
 
+import android.util.Log;
+
 public class Operation {
 
-    double n1;
-    double n2;
+    double numResult;
+    double numTecleado1;
+    double numTecleado2;
+
     String operacion;
 
 
     public Operation() {
+        this.numResult = 0.0;
+    }
+
+    public double getNumResult() {
+
+        return numResult;
+    }
+
+    public void iniciarCalc(){
+        //se pondrá a cero la calculadora
+        this.numResult = 0.0;
 
     }
 
-    public double getN1() {
+    public void setNumTecleado1(double numTecleado1) {
 
-        return n1;
+        this.numTecleado1 = numTecleado1;
+        Log.d("CALCULADORA", "Numero Tecledo1: " + String.valueOf(this.numTecleado1));
     }
 
-    public void setN1(double n1) {
+    public void setNumTecleado2(double numTecleado2) {
 
-        this.n1 = n1;
-    }
-
-    public double getN2() {
-
-        return n2;
-    }
-
-    public void setN2(double n2) {
-
-        this.n2 = n2;
+        this.numTecleado2 = numTecleado2;
+        Log.d("CALCULADORA", "Numero Tecledo2: " + String.valueOf(this.numTecleado2));
     }
 
     public String getOperacion() {
@@ -41,21 +48,23 @@ public class Operation {
         this.operacion = operacion;
     }
 
-    public double realizarOperacion() {
+    public void realizarOperacion() {
 
         switch (this.operacion) {
 
-            case "+":
+            case "sumar":
 
-                return this.n1 + this.n2;
+                this.numResult = this.numResult + this.numTecleado1;
+                Log.d("*CALCULADORA", String.valueOf(this.numResult));
+                break;
 
-            case "-":
+            case "restar":
 
-                return this.n1 - this.n2;
-
+                this.numResult =  this.numTecleado1 - this.numResult;
+                Log.d("*CALCULADORA", String.valueOf(this.numResult));
+                break;
             //System.out.println(this.n1+" "+this.operacion+" "+this.n2+" = "+this.res);
 
         }
-        return 0.0;
     }
 }

@@ -42,6 +42,7 @@
             android:layout_marginRight="5sp"
             android:layout_weight="1"
             android:background="#F7C16D"
+            android:onClick="botonPulsado"
             android:paddingRight="5dp"
             android:text="@string/buttonON"
             android:textSize="24sp" />
@@ -53,6 +54,7 @@
             android:layout_marginRight="5sp"
             android:layout_weight="1"
             android:background="#F7C16D"
+            android:onClick="botonPulsado"
             android:text="@string/buttonDel"
             android:textSize="24sp" />
 
@@ -63,6 +65,7 @@
             android:layout_marginRight="5sp"
             android:layout_weight="1"
             android:background="#F7C16D"
+            android:onClick="botonPulsado"
             android:text="@string/buttonDiv"
             android:textSize="24sp" />
 
@@ -72,6 +75,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#F7C16D"
+            android:onClick="botonPulsado"
             android:text="@string/buttonPor"
             android:textSize="24sp" />
     </LinearLayout>
@@ -90,6 +94,7 @@
             android:layout_marginRight="5sp"
             android:layout_weight="1"
             android:background="#90C6DA"
+            android:onClick="botonPulsado"
             android:text="@string/button7" />
 
         <Button
@@ -99,6 +104,7 @@
             android:layout_marginRight="5sp"
             android:layout_weight="1"
             android:background="#90C6DA"
+            android:onClick="botonPulsado"
             android:text="@string/button8" />
 
         <Button
@@ -108,6 +114,7 @@
             android:layout_marginRight="5sp"
             android:layout_weight="1"
             android:background="#90C6DA"
+            android:onClick="botonPulsado"
             android:text="@string/button9" />
 
         <Button
@@ -116,6 +123,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#F7C16D"
+            android:onClick="botonPulsado"
             android:text="@string/buttonPlus"
             android:textSize="24sp" />
 
@@ -135,6 +143,7 @@
             android:layout_marginRight="5sp"
             android:layout_weight="1"
             android:background="#90C6DA"
+            android:onClick="botonPulsado"
             android:text="@string/button4" />
 
         <Button
@@ -144,6 +153,7 @@
             android:layout_marginRight="5sp"
             android:layout_weight="1"
             android:background="#90C6DA"
+            android:onClick="botonPulsado"
             android:text="@string/button5" />
 
         <Button
@@ -153,6 +163,7 @@
             android:layout_marginRight="5sp"
             android:layout_weight="1"
             android:background="#90C6DA"
+            android:onClick="botonPulsado"
             android:text="@string/button6" />
 
         <Button
@@ -161,6 +172,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#F7C16D"
+            android:onClick="botonPulsado"
             android:text="@string/buttonMinus"
             android:textSize="24sp" />
 
@@ -193,7 +205,7 @@
                     android:layout_marginRight="5sp"
                     android:layout_weight="1"
                     android:background="#90C6DA"
-                    android:onClick="onClickBoton1"
+                    android:onClick="botonPulsado"
                     android:text="@string/button1" />
 
                 <Button
@@ -203,6 +215,7 @@
                     android:layout_marginRight="5sp"
                     android:layout_weight="1"
                     android:background="#90C6DA"
+                    android:onClick="botonPulsado"
                     android:text="@string/button2" />
 
                 <Button
@@ -211,6 +224,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#90C6DA"
+                    android:onClick="botonPulsado"
                     android:text="@string/button3" />
             </LinearLayout>
 
@@ -228,6 +242,7 @@
                     android:layout_marginRight="5sp"
                     android:layout_weight="1"
                     android:background="#90C6DA"
+                    android:onClick="botonPulsado"
                     android:text="@string/buttonPorcentual"
                     android:textSize="24sp" />
 
@@ -238,6 +253,7 @@
                     android:layout_marginRight="5sp"
                     android:layout_weight="1"
                     android:background="#90C6DA"
+                    android:onClick="botonPulsado"
                     android:text="@string/button0" />
 
                 <Button
@@ -246,6 +262,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#90C6DA"
+                    android:onClick="botonPulsado"
                     android:text="@string/buttonPoint" />
             </LinearLayout>
         </LinearLayout>
@@ -263,6 +280,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#F7C16D"
+                android:onClick="botonPulsado"
                 android:text="@string/buttonIgual"
                 android:textSize="24sp" />
         </LinearLayout>
