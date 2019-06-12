@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 //si alguna de ellas es verdadera se debe hacer
                 operation.realizarOperacion();
                 Log.d("*CALCULADORA","Se realizó la suma");
-            }else {
+                }else {
                     operation.setOperacion("sumar");
                     operation.realizarOperacion();
                 }
@@ -121,11 +121,21 @@ public class MainActivity extends AppCompatActivity {
 
                 operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
 
-                if (operation.getOperacion().equals("multiplicacion") || operation.getOperacion().equals("sumar")
+                if (operation.getEstado() == true){
+                    //debo avisar que realice la operación
+                    //con respecto al inicio
+                    operation.setNumResult((Double.parseDouble(stringBuilder.toString())));
+                    Toast.makeText(getApplicationContext(), "estado inicial", Toast.LENGTH_LONG).show();
+                    operation.setOperacion("restar");
+                    operation.setEstado(false);
+
+                } else if (operation.getOperacion().equals("multiplicacion") || operation.getOperacion().equals("sumar")
                         || operation.getOperacion().equals("restar") || operation.getOperacion().equals("division")){
                 //si alguna de ellas es verdadera se debe hacer
                 operation.realizarOperacion();
-            }else {
+                    Toast.makeText(getApplicationContext(), "realizo la operación", Toast.LENGTH_LONG).show();
+
+                } else {
                     operation.setOperacion("restar");
                     operation.realizarOperacion();
                 }
@@ -175,13 +185,16 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.idBotonIgual:
 
-                if (operation.getEstado() == true){
-                    operation.setNumTecleado2(Double.parseDouble(stringBuilder.toString()));
-                    operation.realizarOperacion();
-                    operation.setEstado(false);
-                }else{
-                    operation.realizarOperacion();
-                }
+                //if (operation.getEstado() == true){
+                //    operation.setNumTecleado2(Double.parseDouble(stringBuilder.toString()));
+                //    operation.realizarOperacion();
+                //    operation.setEstado(false);
+                //}else{
+                //asigno el valor tecleado
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
+
+                operation.realizarOperacion();
+                //}
 
                 valor = operation.getNumResult();
                 textViewResult.setText(String.valueOf(valor));

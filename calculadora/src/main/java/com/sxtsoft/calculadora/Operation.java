@@ -30,6 +30,13 @@ public class Operation {
         return numResult;
     }
 
+    public void setNumResult(double numResult) {
+
+        this.numResult = numResult;
+        Log.d("*CALCULADORA", "setNumREsult numRes: " + String.valueOf(this.numResult));
+
+    }
+
     public void iniciarCalc(){
         //se pondrá a cero la calculadora
         this.numResult = 0.0;
@@ -40,7 +47,7 @@ public class Operation {
     public void setNumTecleado1(double numTecleado1) {
 
         this.numTecleado1 = numTecleado1;
-        Log.d("CALCULADORA", "Numero Tecledo1: " + String.valueOf(this.numTecleado1));
+        Log.d("*CALCULADORA", "Numero Tecledo1: " + String.valueOf(this.numTecleado1));
     }
 
     public double getNumTecleado2() {
@@ -50,7 +57,7 @@ public class Operation {
     public void setNumTecleado2(double numTecleado2) {
 
         this.numTecleado2 = numTecleado2;
-        Log.d("CALCULADORA", "Numero Tecledo2: " + String.valueOf(this.numTecleado2));
+        Log.d("*CALCULADORA", "Numero Tecledo2: " + String.valueOf(this.numTecleado2));
     }
 
     public String getOperacion() {
@@ -75,8 +82,10 @@ public class Operation {
 
             case "restar":
 
+
                 this.numResult =  this.numResult - this.numTecleado1;
-                Log.d("*CALCULADORA", String.valueOf(this.numResult));
+                Log.d("*CALCULADORA", "Resta numRes: " + String.valueOf(this.numResult));
+                Log.d("*CALCULADORA", "Resta Tecl: " + String.valueOf(this.numTecleado1));
                 break;
             //System.out.println(this.n1+" "+this.operacion+" "+this.n2+" = "+this.res);
 
