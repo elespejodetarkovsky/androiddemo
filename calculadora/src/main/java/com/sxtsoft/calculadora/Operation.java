@@ -7,12 +7,22 @@ public class Operation {
     double numResult;
     double numTecleado1;
     double numTecleado2;
+    boolean inicio;
 
-    String operacion;
+    String operacion = "";
 
 
     public Operation() {
         this.numResult = 0.0;
+        inicio = true; //cuando incia la calculadora, será importante en la resta
+    }
+
+    public boolean getEstado(){
+        return this.inicio;
+    }
+
+    public void setEstado(boolean inicio){
+        this.inicio = inicio;
     }
 
     public double getNumResult() {
@@ -23,6 +33,7 @@ public class Operation {
     public void iniciarCalc(){
         //se pondrá a cero la calculadora
         this.numResult = 0.0;
+        this.operacion = "";
 
     }
 
@@ -30,6 +41,10 @@ public class Operation {
 
         this.numTecleado1 = numTecleado1;
         Log.d("CALCULADORA", "Numero Tecledo1: " + String.valueOf(this.numTecleado1));
+    }
+
+    public double getNumTecleado2() {
+        return numTecleado2;
     }
 
     public void setNumTecleado2(double numTecleado2) {
@@ -60,11 +75,34 @@ public class Operation {
 
             case "restar":
 
-                this.numResult =  this.numTecleado1 - this.numResult;
+                this.numResult =  this.numResult - this.numTecleado1;
                 Log.d("*CALCULADORA", String.valueOf(this.numResult));
                 break;
             //System.out.println(this.n1+" "+this.operacion+" "+this.n2+" = "+this.res);
 
+            case "multiplicacion":
+
+                if (this.inicio == true){
+                    Log.d("*CALCULADORA", "Num1: " + String.valueOf(this.numTecleado1) + "*" + String.valueOf(this.numTecleado2));
+                    this.numResult =  this.numTecleado1 * this.numTecleado2;
+                } else {
+                    this.numResult =  this.numResult * this.numTecleado1;
+                }
+
+                Log.d("*CALCULADORA", "Multiplicacion: " + String.valueOf(this.numResult) + " " + this.inicio);
+                break;
+
+            case "division":
+
+                if (this.inicio == true){
+                    Log.d("*CALCULADORA", "Num1: " + String.valueOf(this.numTecleado1) + "/" + String.valueOf(this.numTecleado2));
+                    this.numResult =  this.numTecleado1 / this.numTecleado2;
+                } else {
+                    this.numResult =  this.numResult / this.numTecleado1;
+                }
+
+                Log.d("*CALCULADORA", "Division: " + String.valueOf(this.numResult) + " " + this.inicio);
+                break;
         }
     }
 }

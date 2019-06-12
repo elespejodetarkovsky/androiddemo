@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textViewResult = (TextView) findViewById(R.id.viewResult);
-
+        operation.setEstado(true); //inicio el estado en la calcu
 
     }
 
@@ -97,33 +97,94 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.idBotonPlus:
-                operation.setOperacion("sumar");
-
                 //pasaré el valor tecleado al artefacto
 
                 operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
+
+                if (operation.getOperacion().equals("multiplicacion") || operation.getOperacion().equals("sumar")
+                        || operation.getOperacion().equals("restar") || operation.getOperacion().equals("division")){
+                //si alguna de ellas es verdadera se debe hacer
                 operation.realizarOperacion();
+                Log.d("*CALCULADORA","Se realizó la suma");
+            }else {
+                    operation.setOperacion("sumar");
+                    operation.realizarOperacion();
+                }
+
                 stringBuilder.setLength(0);
                 Toast.makeText(getApplicationContext(), "pulsado +", Toast.LENGTH_LONG).show();
 
                 break;
 
             case R.id.idBotonMinus:
-                operation.setOperacion("restar");
-
                 //pasaré el valor tecleado al artefacto
 
                 operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
+
+                if (operation.getOperacion().equals("multiplicacion") || operation.getOperacion().equals("sumar")
+                        || operation.getOperacion().equals("restar") || operation.getOperacion().equals("division")){
+                //si alguna de ellas es verdadera se debe hacer
                 operation.realizarOperacion();
+            }else {
+                    operation.setOperacion("restar");
+                    operation.realizarOperacion();
+                }
+
                 stringBuilder.setLength(0);
                 Toast.makeText(getApplicationContext(), "pulsado -", Toast.LENGTH_LONG).show();
                 break;
 
+            case R.id.idBotonPor:
+                //pasaré el valor tecleado al artefacto
+
+                //si ya hay una operación debo hacerla (cualquier operación)
+                //para cambiar el resultado antes de continuar con otra operación
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
+
+                if (operation.getOperacion().equals("multiplicacion") || operation.getOperacion().equals("sumar")
+                || operation.getOperacion().equals("restar") || operation.getOperacion().equals("division")){
+                    //si alguna de ellas es verdadera se debe hacer
+                    operation.realizarOperacion();
+                }else {
+                    operation.setOperacion("multiplicacion");
+                    operation.realizarOperacion();
+                }
+
+                stringBuilder.setLength(0);
+                //Toast.makeText(getApplicationContext(), "pulsado -", Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.idBotonDiv:
+                //pasaré el valor tecleado al artefacto
+
+                //si ya hay una operación debo hacerla (cualquier operación)
+                //para cambiar el resultado antes de continuar con otra operación
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
+
+                if (operation.getOperacion().equals("multiplicacion") || operation.getOperacion().equals("sumar")
+                        || operation.getOperacion().equals("restar") || operation.getOperacion().equals("division")){
+                    //si alguna de ellas es verdadera se debe hacer
+                    operation.realizarOperacion();
+                }else {
+                    operation.setOperacion("division");
+                }
+
+                stringBuilder.setLength(0);
+                Toast.makeText(getApplicationContext(), "pulsado / estado" + operation.getEstado(), Toast.LENGTH_LONG).show();
+                break;
+
             case R.id.idBotonIgual:
-                operation.realizarOperacion();
+
+                if (operation.getEstado() == true){
+                    operation.setNumTecleado2(Double.parseDouble(stringBuilder.toString()));
+                    operation.realizarOperacion();
+                    operation.setEstado(false);
+                }else{
+                    operation.realizarOperacion();
+                }
+
                 valor = operation.getNumResult();
                 textViewResult.setText(String.valueOf(valor));
-                Toast.makeText(getApplicationContext(), String.valueOf(valor), Toast.LENGTH_LONG).show();
 
                 operation.iniciarCalc();
                 stringBuilder.setLength(0);
