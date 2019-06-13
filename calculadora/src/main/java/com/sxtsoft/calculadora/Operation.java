@@ -7,8 +7,8 @@ import java.text.DecimalFormat;
 public class Operation {
 
     double numResult;
-    double numTecleado1;
-    double numTecleado2;
+    double numTecleado1; //corresponde a la primera parte de la operación
+    double numTecleado2; //Corresponde a la segunda parte de la operación
     boolean inicio;
     String msgError = "";
     String operacion = "";
@@ -53,6 +53,8 @@ public class Operation {
 
     public void iniciarCalc(){
         //se pondrá a cero la calculadora
+        this.numTecleado1 = 0.0;
+        this.numTecleado2 = 0.0;
         this.numResult = 0.0;
         this.operacion = "";
         this.setEstado(true);
@@ -70,6 +72,7 @@ public class Operation {
     }
 
     public double getNumTecleado2() {
+
         return numTecleado2;
     }
 
@@ -95,14 +98,16 @@ public class Operation {
 
             case "sumar":
 
+                //this.numResult = this.numResult + this.numTecleado1;
                 this.numResult = this.numResult + this.numTecleado1;
-                Log.d("*CALCULADORA", String.valueOf(this.numResult));
+                Log.d("*CALCULADORA", "NumRes: " + String.valueOf(this.numResult) + "Tecl1: " + this.numTecleado1);
                 break;
 
             case "restar":
 
 
-                this.numResult =  this.numResult - this.numTecleado1;
+                //this.numResult =  this.numResult - this.numTecleado1;
+                this.numResult =  this.numResult - this.numTecleado2;
                 Log.d("*CALCULADORA", "Resta numRes: " + String.valueOf(this.numResult));
                 Log.d("*CALCULADORA", "Resta Tecl: " + String.valueOf(this.numTecleado1));
                 break;

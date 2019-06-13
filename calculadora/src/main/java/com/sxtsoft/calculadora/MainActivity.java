@@ -41,60 +41,70 @@ public class MainActivity extends AppCompatActivity {
                 cifra = 0;
                 stringBuilder.append(cifra);
                 textViewResult.setText(stringBuilder.toString());
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
                 break;
 
             case R.id.idBoton1:
                 cifra = 1;
                 stringBuilder.append(cifra);
                 textViewResult.setText(stringBuilder.toString());
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
                 break;
 
             case R.id.idBoton2:
                 cifra = 2;
                 stringBuilder.append(cifra);
                 textViewResult.setText(stringBuilder.toString());
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
                 break;
 
             case R.id.idBoton3:
                 cifra = 3;
                 stringBuilder.append(cifra);
                 textViewResult.setText(stringBuilder.toString());
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
                 break;
 
             case R.id.idBoton4:
                 cifra = 4;
                 stringBuilder.append(cifra);
                 textViewResult.setText(stringBuilder.toString());
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
                 break;
 
             case R.id.idBoton5:
                 cifra = 5;
                 stringBuilder.append(cifra);
                 textViewResult.setText(stringBuilder.toString());
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
                 break;
 
             case R.id.idBoton6:
                 cifra = 6;
                 stringBuilder.append(cifra);
                 textViewResult.setText(stringBuilder.toString());
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
                 break;
 
             case R.id.idBoton7:
                 cifra = 7;
                 stringBuilder.append(cifra);
                 textViewResult.setText(stringBuilder.toString());
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
                 break;
 
             case R.id.idBoton8:
                 cifra = 8;
                 stringBuilder.append(cifra);
                 textViewResult.setText(stringBuilder.toString());
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
                 break;
 
             case R.id.idBoton9:
                 cifra = 9;
                 stringBuilder.append(cifra);
                 textViewResult.setText(stringBuilder.toString());
+                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
                 break;
 
             case R.id.idBotonPunto:
@@ -117,13 +127,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.idBotonPlus:
                 //pasaré el valor tecleado al artefacto
 
-                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
-                Log.d("*CALCULADORA", "Suma en boton +: " + String.valueOf(operation.getNumTecleado1()));
-
-                if (operation.getOperacion().equals("multiplicacion") || operation.getOperacion().equals("sumar")
+                if (operation.getEstado() == true) {
+                    //debo avisar que realice la operación
+                    //con respecto al inicio
+                    operation.setOperacion("sumar");
+                    operation.setNumResult(operation.getNumTecleado1()); //le paso el valor al primer término sólo la primera vez
+                    operation.setEstado(false);
+                } else if (operation.getOperacion().equals("multiplicacion") || operation.getOperacion().equals("sumar")
                         || operation.getOperacion().equals("restar") || operation.getOperacion().equals("division")){
                 //si alguna de ellas es verdadera se debe hacer
                 operation.realizarOperacion();
+                operation.setOperacion("sumar");
                 Log.d("*CALCULADORA","Se realizó la suma");
                 }else {
                     operation.setOperacion("sumar");
@@ -131,27 +145,26 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 stringBuilder.setLength(0);
-                Toast.makeText(getApplicationContext(), "pulsado +", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "pulsado +", Toast.LENGTH_LONG).show();
 
                 break;
 
             case R.id.idBotonMinus:
                 //pasaré el valor tecleado al artefacto
 
-                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
 
                 if (operation.getEstado() == true){
                     //debo avisar que realice la operación
                     //con respecto al inicio
-                    operation.setNumResult((Double.parseDouble(stringBuilder.toString())));
-                    Toast.makeText(getApplicationContext(), "estado inicial", Toast.LENGTH_LONG).show();
                     operation.setOperacion("restar");
+                    operation.setNumResult(operation.getNumTecleado1()); //le paso el valor al primer término sólo la primera vez
                     operation.setEstado(false);
 
                 } else if (operation.getOperacion().equals("multiplicacion") || operation.getOperacion().equals("sumar")
                         || operation.getOperacion().equals("restar") || operation.getOperacion().equals("division")){
-                //si alguna de ellas es verdadera se debe hacer
-                operation.realizarOperacion();
+                    //si alguna de ellas es verdadera se debe hacer
+                    operation.realizarOperacion();
+                    operation.setOperacion("restar");
                     Toast.makeText(getApplicationContext(), "realizo la operación", Toast.LENGTH_LONG).show();
 
                 } else {
@@ -166,19 +179,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.idBotonPor:
                 //pasaré el valor tecleado al artefacto
 
-                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
 
                 if (operation.getEstado() == true){
                     //debo avisar que realice la operación
                     //con respecto al inicio
-                    operation.setNumResult((Double.parseDouble(stringBuilder.toString())));
                     operation.setOperacion("multiplicacion");
+                    operation.setNumResult(operation.getNumTecleado1()); //le paso el valor al primer término sólo la primera vez
                     operation.setEstado(false);
 
                 } else if (operation.getOperacion().equals("multiplicacion") || operation.getOperacion().equals("sumar")
                         || operation.getOperacion().equals("restar") || operation.getOperacion().equals("division")){
                     //si alguna de ellas es verdadera se debe hacer
                     operation.realizarOperacion();
+                    operation.setOperacion("multiplicacion");
                     Toast.makeText(getApplicationContext(), "realizo la operación", Toast.LENGTH_LONG).show();
 
                 } else {
@@ -187,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 stringBuilder.setLength(0);
+
                 break;
 
             case R.id.idBotonDiv:
@@ -196,8 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (operation.getEstado() == true){
                     //debo avisar que realice la operación
-                    //con respecto al inicio
-                    operation.setNumResult((Double.parseDouble(stringBuilder.toString())));
+                    operation.setNumResult(operation.getNumTecleado1()); //le paso el valor al primer término sólo la primera vez
                     operation.setOperacion("division");
                     operation.setEstado(false);
 
@@ -205,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
                         || operation.getOperacion().equals("restar") || operation.getOperacion().equals("division")){
                     //si alguna de ellas es verdadera se debe hacer
                     operation.realizarOperacion();
+                    operation.setOperacion("division");
                     Toast.makeText(getApplicationContext(), "realizo la operación", Toast.LENGTH_LONG).show();
 
                 } else {
@@ -217,17 +231,18 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.idBotonIgual:
 
-                operation.setNumTecleado1((Double.parseDouble(stringBuilder.toString())));
-                presionadoIgual = true;
+                //presionadoIgual = true;
 
                 operation.realizarOperacion();
                 //Log.d("*CALCULADORA", "Mensaje error en =: " + operation.getMsgError());
 
                 if (operation.getMsgError().equals("")){
 
+                    double tmpResult = operation.getNumResult();
                     textViewResult.setText(String.valueOf(operation.getNumResult()));
-                    operation.setOperacion("");
-                    //operation.iniciarCalc();
+                    //inicializo la calculadora y paso el valor a tecla1
+                    operation.iniciarCalc();
+                    operation.setNumTecleado1(tmpResult);
                     //stringBuilder.setLength(0);
 
                 }else{
