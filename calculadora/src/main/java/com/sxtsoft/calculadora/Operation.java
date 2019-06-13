@@ -2,13 +2,15 @@ package com.sxtsoft.calculadora;
 
 import android.util.Log;
 
+import java.text.DecimalFormat;
+
 public class Operation {
 
     double numResult;
     double numTecleado1;
     double numTecleado2;
     boolean inicio;
-
+    String msgError = "";
     String operacion = "";
 
 
@@ -17,11 +19,23 @@ public class Operation {
         inicio = true; //cuando incia la calculadora, será importante en la resta
     }
 
+    public String getMsgError(){
+
+        return this.msgError;
+    }
+
+    public void setMsgError(String msgError){
+
+        this.msgError = msgError;
+    }
+
     public boolean getEstado(){
+
         return this.inicio;
     }
 
     public void setEstado(boolean inicio){
+
         this.inicio = inicio;
     }
 
@@ -41,13 +55,18 @@ public class Operation {
         //se pondrá a cero la calculadora
         this.numResult = 0.0;
         this.operacion = "";
-
+        this.setEstado(true);
     }
 
     public void setNumTecleado1(double numTecleado1) {
 
         this.numTecleado1 = numTecleado1;
         Log.d("*CALCULADORA", "Numero Tecledo1: " + String.valueOf(this.numTecleado1));
+    }
+
+    public double getNumTecleado1() {
+
+        return this.numTecleado1;
     }
 
     public double getNumTecleado2() {
@@ -90,27 +109,29 @@ public class Operation {
             //System.out.println(this.n1+" "+this.operacion+" "+this.n2+" = "+this.res);
 
             case "multiplicacion":
+                DecimalFormat df = new DecimalFormat("#.##########");
+                this.numResult =  Math.round(this.numResult * this.numTecleado1*100d)/100d; //this.numResult * this.numTecleado1;
+                //this.numResult =  df.format(this.numResult * this.numTecleado1);
+                //df.format(this.numResult);
 
-                if (this.inicio == true){
-                    Log.d("*CALCULADORA", "Num1: " + String.valueOf(this.numTecleado1) + "*" + String.valueOf(this.numTecleado2));
-                    this.numResult =  this.numTecleado1 * this.numTecleado2;
-                } else {
-                    this.numResult =  this.numResult * this.numTecleado1;
-                }
-
-                Log.d("*CALCULADORA", "Multiplicacion: " + String.valueOf(this.numResult) + " " + this.inicio);
+                Log.d("*CALCULADORA", "Multiplicacion numRes: " + String.valueOf(this.numResult));
+                Log.d("*CALCULADORA", "Multiplicacion Tecl: " + String.valueOf(this.numTecleado1));
                 break;
 
             case "division":
 
-                if (this.inicio == true){
-                    Log.d("*CALCULADORA", "Num1: " + String.valueOf(this.numTecleado1) + "/" + String.valueOf(this.numTecleado2));
-                    this.numResult =  this.numTecleado1 / this.numTecleado2;
-                } else {
-                    this.numResult =  this.numResult / this.numTecleado1;
+                Log.d("*CALCULADORA", "Division Tecl: " + String.valueOf(this.numTecleado1));
+                try{
+
+                    this.numResult = this.numResult / this.numTecleado1;
+                    Log.d("*CALCULADORA", "Division numRes: " + String.valueOf(this.numResult));
+                    Log.d("*CALCULADORA", "Division Tecl: " + String.valueOf(this.numTecleado1));
+
+                }catch (Exception e){
+                    this.numResult = 0.0;
+                    this.msgError = e.getMessage();
                 }
 
-                Log.d("*CALCULADORA", "Division: " + String.valueOf(this.numResult) + " " + this.inicio);
                 break;
         }
     }
