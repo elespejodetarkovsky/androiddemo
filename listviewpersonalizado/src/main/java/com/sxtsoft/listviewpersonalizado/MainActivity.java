@@ -2,8 +2,12 @@ package com.sxtsoft.listviewpersonalizado;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    private ListView lista;
 
     private String[][] datos = {
             {"Tarkovsky", "Zerkalo", "200min","8","blabola1"},
@@ -19,15 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
     private int[] datosimg = {
 
-            R.drawable.Tarkovsky1,
-            R.drawable.Tarkovsky2,
-            R.drawable.Tarkovsky3,
-            R.drawable.Tarkovsky4,
-            R.drawable.Tarkovsky5,
-            R.drawable.FanHo1,
-            R.drawable.FanHo2,
-            R.drawable.FanHo3,
-            R.drawable.FanHo4
+            R.drawable.tarkovsky1,
+            R.drawable.tarkovsky2,
+            R.drawable.tarkovsky3,
+            R.drawable.tarkovsky4,
+            R.drawable.tarkovsky5,
+            R.drawable.fanho1,
+            R.drawable.fanho2,
+            R.drawable.fanho3,
+            R.drawable.fanho4
     };
 
 
@@ -35,5 +39,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        lista = (ListView) findViewById(R.id.idMiLista);
+
+        //En esta clase SOLO FALTA UNA LINEA DE CODIGO
+
+        Adaptador adaptador = new Adaptador(this, datos, datosimg);
+
+        lista.setAdapter(adaptador);
     }
 }
