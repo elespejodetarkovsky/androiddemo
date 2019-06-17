@@ -1,5 +1,7 @@
 package com.sxtsoft.medicdata.model;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,6 +47,8 @@ public class LecturaServicesImpl implements LecturaServices{
             fecha7 = adf.parse("08/01/2019 10:30:10");
             fecha8 = adf.parse("09/01/2019 09:35:10");
             fecha9 = adf.parse("10/01/2019 12:25:10");
+
+            Log.d("INFO", "**Fecha: " + fecha2);
 
         } catch (ParseException e) {
             e.printStackTrace();
