@@ -33,11 +33,13 @@ public class Adaptador extends BaseAdapter {
 
         TextView diastolica = (TextView) vista.findViewById(R.id.idDiastolica);
         TextView sistolica = (TextView) vista.findViewById(R.id.idSiastolica);
+        TextView fecha = (TextView) vista.findViewById(R.id.idFecha);
 
         Lectura lectura = lecturas.get(position); //ex i
 
-        diastolica.setText(String.valueOf(lectura.getDiastolica()));
-        sistolica.setText(String.valueOf(lectura.getSistolica()));
+        diastolica.setText(String.valueOf(lectura.getDiastolica()) + "mmHg");
+        sistolica.setText(String.valueOf(lectura.getSistolica()) + "mmHg");
+        fecha.setText(String.valueOf(lectura.getFechaHora()));
 
         return vista;
     }

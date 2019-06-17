@@ -24,6 +24,7 @@ public class LecturaServicesImpl implements LecturaServices{
         LECTURAS = new TreeMap<>();
 
         SimpleDateFormat adf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        //SimpleDateFormat adf = new SimpleDateFormat(("EEE, MMM d,HH:mm, ''yyyy"));
 
         Date fecha0 = null;
         Date fecha1 = null;
@@ -49,21 +50,22 @@ public class LecturaServicesImpl implements LecturaServices{
             fecha9 = adf.parse("10/01/2019 12:25:10");
 
             Log.d("INFO", "**Fecha: " + fecha2);
+            Log.d("INFO", "**Fecha: aqui sip");
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         Lectura l0 = new Lectura(fecha0, 97.6, 91.2, 105.3,2.15,41.3);
-        Lectura l1 = new Lectura(fecha0, 97.6, 90.2, 115.3,2.3,42.0);
-        Lectura l2 = new Lectura(fecha0, 97.6, 88.2, 102.3,2.4,41.5);
-        Lectura l3 = new Lectura(fecha0, 97.6, 89.2, 99.3,2.9,41.2);
-        Lectura l4 = new Lectura(fecha0, 97.6, 79.2, 101.3,2.6,42.3);
-        Lectura l5 = new Lectura(fecha0, 97.6, 92.2, 102.3,2.0,43.3);
-        Lectura l6 = new Lectura(fecha0, 97.6, 87.2, 107.3,1.8,39.6);
-        Lectura l7 = new Lectura(fecha0, 97.6, 92.2, 110.3,2.3,41.3);
-        Lectura l8 = new Lectura(fecha0, 97.6, 79.2, 100.3,2.0,41.2);
-        Lectura l9 = new Lectura(fecha0, 97.6, 91.2, 125.3,2.15,41.3);
+        Lectura l1 = new Lectura(fecha1, 97.6, 90.2, 115.3,2.3,42.0);
+        Lectura l2 = new Lectura(fecha2, 97.6, 88.2, 102.3,2.4,41.5);
+        Lectura l3 = new Lectura(fecha3, 97.6, 89.2, 99.3,2.9,41.2);
+        Lectura l4 = new Lectura(fecha4, 97.6, 79.2, 101.3,2.6,42.3);
+        Lectura l5 = new Lectura(fecha5, 97.6, 92.2, 102.3,2.0,43.3);
+        Lectura l6 = new Lectura(fecha6, 97.6, 87.2, 107.3,1.8,39.6);
+        Lectura l7 = new Lectura(fecha7, 97.6, 92.2, 110.3,2.3,41.3);
+        Lectura l8 = new Lectura(fecha8, 97.6, 79.2, 100.3,2.0,41.2);
+        Lectura l9 = new Lectura(fecha9, 97.6, 91.2, 125.3,2.15,41.3);
 
         l0.setCodigo(100);
         l1.setCodigo(101);
@@ -75,6 +77,11 @@ public class LecturaServicesImpl implements LecturaServices{
         l7.setCodigo(107);
         l8.setCodigo(108);
         l9.setCodigo(109);
+
+        //Introduzco en la instancia treemap heredada del MAP
+        //las lecturas
+        //con la siguiente forma
+        //KEY: código VALUES:Lecturas.toString
 
         LECTURAS.put(l0.getCodigo(),l0);
         LECTURAS.put(l1.getCodigo(),l1);
