@@ -1,4 +1,4 @@
-package com.sxtsoft.listviewpersonalizado;
+package com.sxtsoft.listviewpaises;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -28,28 +28,23 @@ public class Adaptador extends BaseAdapter {
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
 
-        final View vista = inflater.inflate(R.layout.elemento_lista, null);
+        final View vista = inflater.inflate(R.layout.elemento_lista_paises, null);
 
-        TextView titulo = (TextView) vista.findViewById(R.id.idContinente);
-        TextView duracion = (TextView) vista.findViewById(R.id.idDuracion);
-        TextView director = (TextView) vista.findViewById(R.id.idNombrePais);
+        TextView nombre = (TextView) vista.findViewById(R.id.idNombrePais);
+        TextView continente = (TextView) vista.findViewById(R.id.idContinente);
         ImageView imagen = (ImageView) vista.findViewById(R.id.idImagenFlags);
-        RatingBar calificacion = (RatingBar) vista.findViewById(R.id.idRatingBarPel);
 
         //vamos a colocar datos en los views...
 
-        titulo.setText(datos[i][1]);
-        director.setText(datos[i][0]);
-        duracion.setText("duración: " + datos[i][2]);
+        nombre.setText(datos[i][0]);
+        continente.setText(datos[i][1]);
         imagen.setImageResource(imagenes[i]);
-        calificacion.setProgress((Integer.valueOf(datos[i][3])));
 
         //para cuando hagamos click en el item y veamos la ficha completa
 
         imagen.setTag(i);
 
         return vista;
-
 
     }
 

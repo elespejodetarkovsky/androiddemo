@@ -9,21 +9,45 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView lista;
 
-    private String[][] datos = {
-            {"Tarkovsky", "Zerkalo", "200min","8","blabola1"},
-            {"Tarkovsky", "Ivan", "200min","9","blabola2"},
-            {"Tarkovsky", "Nostalghia", "200min","7","blabola3"},
-            {"Tarkovsky", "Stalker", "200min","6","blabola4"},
-            {"Tarkovsky", "Andrei Rublev", "200min","8","blabola5"},
-            {"Fan ho", "Hong Kong 65", "200min","10","blabola1"},
-            {"Fan ho", "Hong Kong 59", "200min","9","blaasbola1"},
-            {"Fan ho", "Hong Kong 66", "200min","7","blaasdbola1"},
-            {"Fan ho", "China 67", "200min","10","aadadvvvdf"}
-    };
+//    private String[][] datos = {
+//            {"America", "Canada"},
+//            {"America", "Estados Unidos"},
+//            {"America", "Mexico"},
+//            {"America", "Nicaragua"},
+//            {"America", "Venezuela"},
+//            {"America", "Hong Kong 65", "200min","10","blabola1"},
+//            {"Fan ho", "Hong Kong 59", "200min","9","blaasbola1"},
+//            {"Fan ho", "Hong Kong 66", "200min","7","blaasdbola1"},
+//            {"Fan ho", "China 67", "200min","10","aadadvvvdf"}
+//    };
+
+        private String[][] datos = {
+            {"America", "Canada"},
+            {"America", "Estados Unidos"},
+            {"America", "Mexico"},
+            {"America", "Nicaragua"},
+            {"America", "Venezuela"},
+            {"America", "Uruguay"},
+            {"America", "Argentina"},
+            {"America", "Brasil"},
+            {"Africa", "Marruecos"},
+                {"Africa", "Argelia"},
+                {"Africa", "Guinea"},
+                {"Africa", "Egipto"},
+                {"Africa", "Uganda"},
+                {"Europa", "España"},
+                {"Europa", "Francia"},
+                {"Europa", "Rusia"},
+                {"Europa", "Turquía"}
+                {"Asia", "China"},
+                {"Asia", "Japón"},
+                {"Asia", "Corea"}
+   };
+
 
     private int[] datosimg = {
 
-            R.drawable.tarkovsky1,
+            R.drawable.,
             R.drawable.tarkovsky2,
             R.drawable.tarkovsky3,
             R.drawable.tarkovsky4,
