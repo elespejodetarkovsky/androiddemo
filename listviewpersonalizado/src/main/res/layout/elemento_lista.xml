@@ -48,7 +48,7 @@
         app:layout_constraintGuide_begin="205dp" />
 
     <TextView
-        android:id="@+id/idNombrePais"
+        android:id="@+id/idDirector"
         android:layout_width="88dp"
         android:layout_height="22dp"
         android:layout_marginStart="12dp"
@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/idContinente"
+        android:id="@+id/idTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"

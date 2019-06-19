@@ -5,6 +5,8 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,7 @@ public class LecturaServicesImpl implements LecturaServices{
 
         LECTURAS = new TreeMap<>();
 
-        SimpleDateFormat adf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat adf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         //SimpleDateFormat adf = new SimpleDateFormat(("EEE, MMM d,HH:mm, ''yyyy"));
 
         Date fecha0 = null;
@@ -41,7 +43,7 @@ public class LecturaServicesImpl implements LecturaServices{
             fecha0 = adf.parse("01/01/2019 1:20:10");
             fecha1 = adf.parse("02/01/2019 12:20:10");
             fecha2 = adf.parse("03/01/2019 11:19:10");
-            fecha3 = adf.parse("04/01/2019 10:23:10");
+            fecha3 = adf.parse("22/01/2019 15:23:10");
             fecha4 = adf.parse("05/01/2019 09:22:10");
             fecha5 = adf.parse("06/01/2019 05:13:10");
             fecha6 = adf.parse("07/01/2019 08:20:10");
@@ -49,23 +51,21 @@ public class LecturaServicesImpl implements LecturaServices{
             fecha8 = adf.parse("09/01/2019 09:35:10");
             fecha9 = adf.parse("10/01/2019 12:25:10");
 
-            Log.d("INFO", "**Fecha: " + fecha2);
-            Log.d("INFO", "**Fecha: aqui sip");
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         Lectura l0 = new Lectura(fecha0, 97.6, 91.2, 105.3,2.15,41.3);
-        Lectura l1 = new Lectura(fecha1, 97.6, 90.2, 115.3,2.3,42.0);
-        Lectura l2 = new Lectura(fecha2, 97.6, 88.2, 102.3,2.4,41.5);
+        Lectura l1 = new Lectura(fecha1, 93.6, 90.2, 115.3,2.3,42.0);
+        Lectura l2 = new Lectura(fecha2, 95.6, 88.2, 102.3,2.4,41.5);
         Lectura l3 = new Lectura(fecha3, 97.6, 89.2, 99.3,2.9,41.2);
-        Lectura l4 = new Lectura(fecha4, 97.6, 79.2, 101.3,2.6,42.3);
-        Lectura l5 = new Lectura(fecha5, 97.6, 92.2, 102.3,2.0,43.3);
+        Lectura l4 = new Lectura(fecha4, 88.6, 79.2, 101.3,2.6,42.3);
+        Lectura l5 = new Lectura(fecha5, 97.3, 92.2, 102.3,2.0,43.3);
         Lectura l6 = new Lectura(fecha6, 97.6, 87.2, 107.3,1.8,39.6);
-        Lectura l7 = new Lectura(fecha7, 97.6, 92.2, 110.3,2.3,41.3);
-        Lectura l8 = new Lectura(fecha8, 97.6, 79.2, 100.3,2.0,41.2);
-        Lectura l9 = new Lectura(fecha9, 97.6, 91.2, 125.3,2.15,41.3);
+        Lectura l7 = new Lectura(fecha7, 99.6, 92.2, 110.3,2.3,41.3);
+        Lectura l8 = new Lectura(fecha8, 97.2, 79.2, 100.3,2.0,41.2);
+        Lectura l9 = new Lectura(fecha9, 97.8, 91.2, 125.3,2.15,41.3);
 
         l0.setCodigo(100);
         l1.setCodigo(101);
@@ -108,7 +108,7 @@ public class LecturaServicesImpl implements LecturaServices{
     public Lectura create(Lectura lectura) {
         //hemos de calcular el nuevo código
         Integer maxCode = ((TreeMap<Integer, Lectura>) LECTURAS).lastKey();
-        Integer newCode = maxCode++;
+        Integer newCode = ++maxCode; //el ++ al principio para que lo agregue antes
         lectura.setCodigo(newCode);
         return LECTURAS.put(lectura.getCodigo(),lectura);
     }
@@ -138,8 +138,17 @@ public class LecturaServicesImpl implements LecturaServices{
 
     @Override
     public List<Lectura> getAll() {
+        List<Lectura> lecturas = new ArrayList<>(LECTURAS.values());
 
-        return new ArrayList<Lectura>(LECTURAS.values());
+        Collections.sort(lecturas, new Comparator<Lectura>() {
+
+            @Override
+            public int compare(Lectura lectura0, Lectura lectura1) {
+                return lectura1.getCodigo() - lectura0.getCodigo();
+            }
+        });
+
+        return lecturas;
     }
 
     @Override

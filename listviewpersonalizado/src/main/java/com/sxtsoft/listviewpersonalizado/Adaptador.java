@@ -1,6 +1,7 @@
 package com.sxtsoft.listviewpersonalizado;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +31,9 @@ public class Adaptador extends BaseAdapter {
 
         final View vista = inflater.inflate(R.layout.elemento_lista, null);
 
-        TextView titulo = (TextView) vista.findViewById(R.id.idContinente);
+        TextView titulo = (TextView) vista.findViewById(R.id.idTitulo);
         TextView duracion = (TextView) vista.findViewById(R.id.idDuracion);
-        TextView director = (TextView) vista.findViewById(R.id.idNombrePais);
+        TextView director = (TextView) vista.findViewById(R.id.idDirector);
         ImageView imagen = (ImageView) vista.findViewById(R.id.idImagenFlags);
         RatingBar calificacion = (RatingBar) vista.findViewById(R.id.idRatingBarPel);
 
@@ -46,7 +47,20 @@ public class Adaptador extends BaseAdapter {
 
         //para cuando hagamos click en el item y veamos la ficha completa
 
-        imagen.setTag(i);
+        imagen.setTag(i); //hago esto para que sea accesible en el listener
+                          //porque dentro del listener no es accesible
+
+        imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(contexto, VisorImagen.class);
+
+                intent.putExtra("IMG", imagenes[(Integer) v.getTag()]);
+                contexto.startActivity(intent);
+
+            }
+        });
 
         return vista;
 
