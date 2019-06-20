@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">gestionmultas</string>
+
+    <!--modelo multas-->
+    <string name="codimulta">código</string>
+    <string name="codiagente">agente</string>
+    <string name="motivo">motivo</string>
+    <string name="monto">monto</string>
+
+</resources>
