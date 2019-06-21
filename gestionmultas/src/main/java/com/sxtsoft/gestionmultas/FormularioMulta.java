@@ -86,6 +86,15 @@ public class FormularioMulta extends AppCompatActivity {
 
         String strMotivo = motivo.getText().toString();
         String strObs = observaciones.getText().toString();
+        double importe;
+
+
+        //Evaluo el importe
+        //LEVE 50 GRAVE 100 MUY GRAVE 200
+
+        if (desplegableTipo.getSelectedItem() == Tipo.LEVE){
+            importe = 50;
+        } else ///continuar desde aqui
 
         double peso = Double.parseDouble(editPeso.getText().toString());
         double diastolica = Double.parseDouble(editDiastolica.getText().toString());
