@@ -6,5 +6,8 @@
     <string name="codiagente">agente</string>
     <string name="motivo">motivo</string>
     <string name="monto">monto</string>
+    <string name="aceptadaSi">SI</string>
+    <string name="aceptadaNo">NO</string>
+
 
 </resources>

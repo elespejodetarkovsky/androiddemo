@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sxtsoft.gestionmultas.model.Agente;
+import com.sxtsoft.gestionmultas.model.Multa;
 import com.sxtsoft.gestionmultas.model.Tipo;
 import com.sxtsoft.gestionmultas.services.impl.AgenteServicesImpl;
 import com.sxtsoft.gestionmultas.services.impl.MultaServicesImpl;
@@ -43,14 +45,12 @@ public class FormularioMulta extends AppCompatActivity {
         desplegableAgentes = (Spinner) findViewById(R.id.idfrmAgente);
         desplegableTipo = (Spinner) findViewById(R.id.idfrmTipo);
         aceptada = (RadioGroup) findViewById(R.id.idfrmAceptada);
-
-
+        motivo = (TextView) findViewById(R.id.idfrmMotivo);
+        observaciones = (TextView) findViewById(R.id.idfrmObs);
 
 
         //obtengo la única instancia de la implementacion del manejo de Agentes.
         agentes = AgenteServicesImpl.getInstance().getAll();
-        motivo = (TextView) findViewById(R.id.idfrmMotivo);
-        observaciones = (TextView) findViewById(R.id.idfrmObs);
 
         codigosAgentes = new ArrayList<>(); //Instancio la lista que creará la lista de codigos de Agentes
 
@@ -87,32 +87,74 @@ public class FormularioMulta extends AppCompatActivity {
         String strMotivo = motivo.getText().toString();
         String strObs = observaciones.getText().toString();
         double importe;
-
+        boolean aceptadaSiNo;
 
         //Evaluo el importe
         //LEVE 50 GRAVE 100 MUY GRAVE 200
 
         if (desplegableTipo.getSelectedItem() == Tipo.LEVE){
             importe = 50;
-        } else ///continuar desde aqui
+        } else if (desplegableTipo.getSelectedItem() == Tipo.GRAVE){
+            importe = 100;
+        } else {
+            importe = 200;
+        }
+        //*******************************
 
-        double peso = Double.parseDouble(editPeso.getText().toString());
-        double diastolica = Double.parseDouble(editDiastolica.getText().toString());
-        double sistolica = Double.parseDouble(editSistolica.getText().toString());
 
-        //Vamos a instanciar una lectura...
-        Lectura lectura = new Lectura(new Date(), peso, diastolica, sistolica);
+        //evaluo si ha sido aceptada o no
+        //en funcion de si o no
+        //y lo paso a boolean
+        Log.d("INFO", "RadioButton" + String.valueOf(aceptada.getCheckedRadioButtonId()));
 
-        //Vamor a persistir (guardarla) la lectura...
-        lecturaServices.create(lectura);
+        int tmpRadioButton = aceptada.getCheckedRadioButtonId(); //devuelve el id del radiobutton seleccionado
+        RadioButton radioButton = (RadioButton) findViewById(tmpRadioButton);
 
-        //Vamos a instanciar un intent
+        if (radioButton.getText().toString().equals("RadioButtonSI")){
+            aceptadaSiNo = true;
+        } else{
+            aceptadaSiNo = false;
+        }
 
+
+        //Instancio una multa
+        Multa multa = new Multa();
+
+        multa.setAceptada(aceptadaSiNo);
+        multa.setImporte(importe);
+        multa.setAgente(agente);
+        multa.setFechaHora(new Date());
+        multa.setMotivo(strMotivo);
+        multa.setObservaciones(strObs);
+        multa.setTipo((Tipo) desplegableTipo.getSelectedItem());
+
+        MultaServicesImpl.getInstance().create(multa);
+
+        Log.d("INFO", multa.toString());
+
+        //Instanciaremos un intent
         Intent intent = new Intent(this, MainActivity.class);
 
-        //Vamor a instanciar un activity
-
+        //Instanciamos un activity
         startActivity(intent);
+
+//        double peso = Double.parseDouble(editPeso.getText().toString());
+//        double diastolica = Double.parseDouble(editDiastolica.getText().toString());
+//        double sistolica = Double.parseDouble(editSistolica.getText().toString());
+//
+//        //Vamos a instanciar una lectura...
+//        Lectura lectura = new Lectura(new Date(), peso, diastolica, sistolica);
+//
+//        //Vamor a persistir (guardarla) la lectura...
+//        lecturaServices.create(lectura);
+//
+//        //Vamos a instanciar un intent
+//
+//        Intent intent = new Intent(this, MainActivity.class);
+//
+//        //Vamor a instanciar un activity
+//
+//        startActivity(intent);
 
     }
 }
