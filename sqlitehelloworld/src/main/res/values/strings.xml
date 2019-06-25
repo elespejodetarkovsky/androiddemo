@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">sqliteHelloWorld</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido1">Primer Apellido</string>
+    <string name="apellido2">Segundo Apellido</string>
+    <string name="crear">crear</string>
+    <string name="listar">listar</string>
+</resources>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.sxtsoft.medicdata.model.DatabaseHelper;
 import com.sxtsoft.medicdata.model.Lectura;
 import com.sxtsoft.medicdata.model.LecturaServicesImpl;
 
@@ -19,12 +20,13 @@ public class Adaptador extends BaseAdapter {
     private LayoutInflater inflater = null;
     private List<Lectura> lecturas;
     private Context contexto;
+    private DatabaseHelper dbAdapter;
 
     public Adaptador (Context contexto){
         this.contexto = contexto;
         inflater = (LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
-        lecturas = LecturaServicesImpl.getInstance().getAll();
-
+        //lecturas = LecturaServicesImpl.getInstance().getAll();
+        dbAdapter = new DatabaseHelper(contexto);
     }
 
     @Override
