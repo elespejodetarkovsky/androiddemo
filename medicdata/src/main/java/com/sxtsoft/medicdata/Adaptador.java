@@ -1,6 +1,7 @@
 package com.sxtsoft.medicdata;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.sxtsoft.medicdata.model.DatabaseHelper;
+import com.sxtsoft.medicdata.database.DatabaseHelper;
 import com.sxtsoft.medicdata.model.Lectura;
-import com.sxtsoft.medicdata.model.LecturaServicesImpl;
+import com.sxtsoft.medicdata.model.LecturaServices;
+import com.sxtsoft.medicdata.model.LecturaServicesSQLite;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -20,13 +22,14 @@ public class Adaptador extends BaseAdapter {
     private LayoutInflater inflater = null;
     private List<Lectura> lecturas;
     private Context contexto;
-    private DatabaseHelper dbAdapter;
+    private LecturaServices lecturaServicesSQLite;
 
     public Adaptador (Context contexto){
         this.contexto = contexto;
         inflater = (LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
-        //lecturas = LecturaServicesImpl.getInstance().getAll();
-        dbAdapter = new DatabaseHelper(contexto);
+        lecturaServicesSQLite = new LecturaServicesSQLite(contexto);
+        lecturas = lecturaServicesSQLite.getAll();
+
     }
 
     @Override
@@ -63,6 +66,12 @@ public class Adaptador extends BaseAdapter {
 
         peso.setText((String.valueOf(lectura.getPeso())));
 
+        if (position % 2 == 0){
+            vista.setBackgroundColor(Color.BLUE);
+        }
+        else {
+            vista.setBackgroundColor(Color.WHITE);
+        }
         return vista;
     }
 
