@@ -73,13 +73,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        //modifico la fecha para que sea "entendible"
-        //por el sqllite
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        String strDate = dateFormat.format(lectura.getFechaHora());
-
-        contentValues.put(COL_1, strDate);
+        contentValues.put(COL_1, dateToString(lectura.getFechaHora()));
         contentValues.put(COL_2, lectura.getPeso());
         contentValues.put(COL_3, lectura.getDiastolica());
         contentValues.put(COL_4, lectura.getSistolica());
@@ -114,17 +109,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 double longitud = cursor.getDouble(5);
                 double latitud = cursor.getDouble(6);
 
-                //convierto el String to Date
-                Date fecha;
 
-                try {
-                    fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(strFecha);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    fecha = new Date();
-                }
+                Lectura lectura = new Lectura(this.stringToDate(strFecha), peso, diastolica, sistolica, longitud, latitud);
 
-                Lectura lectura = new Lectura(fecha, peso, diastolica, sistolica, longitud, latitud);
+                //el código de la base de datos...para que no haya discrepancias.
+
                 lectura.setCodigo(codigo);
                 lecturas.add(lectura);
 
@@ -166,17 +155,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             double longitud = cursor.getDouble(4);
             double latitud = cursor.getDouble(5);
 
-            //convierto el String to Date
-            Date fecha;
 
-            try {
-                fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(strFecha);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                fecha = new Date();
-            }
-
-            Lectura lectura = new Lectura(fecha, peso, diastolica, sistolica, longitud, latitud);
+            Lectura lectura = new Lectura(this.stringToDate(strFecha), peso, diastolica, sistolica, longitud, latitud);
             return lectura;
 
         }
@@ -195,6 +175,72 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return resultado == -1 ? false : true;
 
     }
+
+    public Lectura update(Lectura lectura){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+
+        contentValues.put(COL_1, this.dateToString(lectura.getFechaHora()));
+        contentValues.put(COL_2, lectura.getPeso());
+        contentValues.put(COL_3, lectura.getDiastolica());
+        contentValues.put(COL_4, lectura.getSistolica());
+        contentValues.put(COL_5, lectura.getLongitud());
+        contentValues.put(COL_6, lectura.getLatitud());
+
+        String[] args = new String[]{String.valueOf(lectura.getCodigo())};
+
+        db.update(LECTURAS_TABLE, contentValues, "CODIGO=?", args);
+
+        return lectura;
+    }
+
+    public List<Lectura> getBetweenDates(Date fecha1, Date fecha2) {
+
+        List<Lectura> lecturas = new ArrayList<>();
+
+        for(Lectura lectura: getAll()){     //this.getAll()
+
+            Date fechaHora = lectura.getFechaHora();
+            if (fechaHora.after(fecha1) && fechaHora.before(fecha2)){
+                lecturas.add(lectura);
+            }
+        }
+
+        return lecturas;
+    }
+
+
+    private String dateToString(Date fecha){
+        //este método convertirá
+        //una fecha (Date) en un string
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return dateFormat.format(fecha);
+
+    }
+
+    private Date stringToDate(String strDate){
+        //este método convertirá
+        //un String en una fecha
+
+        //convierto el String to Date
+        Date fecha;
+
+        try {
+            fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            fecha = new Date();
+        }
+
+        return fecha;
+
+    }
+
+
 
 
 }

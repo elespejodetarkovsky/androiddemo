@@ -31,7 +31,7 @@ public class LecturaServicesSQLite implements LecturaServices {
     @Override
     public Lectura update(Lectura lectura) {
         //TODO
-        return null;
+        return myDB.update(lectura);
     }
 
     @Override
@@ -48,6 +48,6 @@ public class LecturaServicesSQLite implements LecturaServices {
     @Override
     public List<Lectura> getBetweenDates(Date fecha1, Date fecha2) {
         //TODO
-        return null;
+        return myDB.getBetweenDates(fecha1, fecha2);
     }
 }
