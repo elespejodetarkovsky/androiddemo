@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.print.PrinterId;
 import android.util.Log;
 
 import com.sxtsoft.medicdata.model.Lectura;
@@ -19,6 +20,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "MEDICDATA.DB";
+
     private static final String LECTURAS_TABLE = "LECTURAS";
 
     private static final String COL_0 = "CODIGO";
@@ -28,6 +30,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_4 = "SISTOLICA";
     private static final String COL_5 = "LONGITUD";
     private static final String COL_6 = "LATITUD";
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -45,6 +49,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
            4     SISTOLICA   REAL NOT NULL,
            5     LONGITUD    REAL,
            6     LATITUD     REAL) */
+        //se utiliza una sola vez en la aplicacion...si ve que está
+        //la db.
 
         StringBuilder sb = new StringBuilder();
         sb.append("CREATE TABLE " + LECTURAS_TABLE + " (")
@@ -81,18 +87,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_5, lectura.getLongitud());
         contentValues.put(COL_6, lectura.getLatitud());
 
+        //nullColumnHack se utiliza cuando pretendemos utilizar registros
+        //con valores null. En ese caso, contentValues estará vacío (sin PUT)
+
         long resultado = db.insert(LECTURAS_TABLE, null, contentValues);
+
+        //insert nos devuelve un long...la Id del registro que acaba de generar
+        // o -1 si algo salió mal
 
         lectura.setCodigo((int) resultado);
 
-        Log.d("******", "Vamos a dar de alta: " + lectura.toString());
-
+        //si algo va mal devuelvo un null
         return resultado == -1 ? null : lectura;
     }
 
     public List<Lectura> getAll() {
 
         SQLiteDatabase db = getWritableDatabase();
+
         Cursor cursor = db.rawQuery("SELECT * FROM " + LECTURAS_TABLE, null);
 
         List<Lectura> lecturas = new ArrayList<Lectura>();
@@ -147,6 +159,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToNext();
 
             //Integer codigo = cursor.getInt(0);
+            //el getxxx indica la forma en que lo quieres
+            //por ejemplo el entero 1...el getString será "1"
 
             String strFecha = cursor.getString(0);
             double peso = cursor.getDouble(1);
@@ -199,6 +213,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public List<Lectura> getBetweenDates(Date fecha1, Date fecha2) {
 
+        //hacerlo en una consulta de base de datos
+
         List<Lectura> lecturas = new ArrayList<>();
 
         for(Lectura lectura: getAll()){     //this.getAll()
@@ -213,12 +229,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public void transferencia(){
+
+        //BEGIN TRANSACTION
+        //leemos salddo
+        //si saldo cubre importe a transferir...
+
+
+            //descontamos importe a cuenta origen
+
+            //SI PETA NO SE HACE...
+            //incrementamos importe a cuenta destino
+
+        //END TRANSACTION
+    }
+//*****************************************************
+//              METODOS PRIVADOS                    ***
+//*****************************************************
+
     private String dateToString(Date fecha){
         //este método convertirá
         //una fecha (Date) en un string
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        return dateFormat.format(fecha);
+        return sdf.format(fecha);
 
     }
 
@@ -230,7 +263,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Date fecha;
 
         try {
-            fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(strDate);
+            fecha = sdf.parse(strDate);
         } catch (ParseException e) {
             e.printStackTrace();
             fecha = new Date();
@@ -239,7 +272,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return fecha;
 
     }
-
 
 
 
