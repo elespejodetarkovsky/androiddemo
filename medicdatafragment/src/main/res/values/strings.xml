@@ -17,7 +17,7 @@
     <string name="longitud">longitud</string>
     <string name="latitud">latitud</string>
 
-    <string name="enviar">enviar</string>
+    <string name="guardar">guardar</string>
 
     <!--Place Holders para Formulario-->
     <string name="diastolicaPlaceHolder">000</string>

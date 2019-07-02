@@ -44,7 +44,7 @@ public class FormularioActivity extends AppCompatActivity implements ComunicaMen
 
         // Aquí llega la información de boton_pulsado 0, 1 o 2
         //menu(extras.getInt("BOTON_PULSADO"));
-        menu(1);
+        menu(0);
     }
 
     @Override
@@ -61,62 +61,5 @@ public class FormularioActivity extends AppCompatActivity implements ComunicaMen
 
         fragmentTransaction.replace(R.id.destino, fragments[botonPulsado]);
         fragmentTransaction.commit();
-    }
-
-    public void enviar(View view){
-        //comprobamos
-
-        Log.d("INFO","ENTRAMOS EN ENVIAR");
-
-        EditText editPeso = (EditText) findViewById(R.id.idEntradaPeso);
-        EditText editDiastolica = (EditText) findViewById(R.id.idEntradaDiastolica);
-        EditText editSistolica = (EditText) findViewById(R.id.idEntradaSistolica);
-
-        double peso = Double.parseDouble(editPeso.getText().toString());
-        double diastolica = Double.parseDouble(editDiastolica.getText().toString());
-        double sistolica = Double.parseDouble(editSistolica.getText().toString());
-
-        //Vamos a instanciar una lectura...
-        Lectura lectura = new Lectura(new Date(), peso, diastolica, sistolica);
-
-        //Vamor a persistir (guardarla) la lectura...
-        lecturaServices.create(lectura);
-
-        //guardaré en la base de datos
-        //DateFormat dateFormat = new SimpleDateFormat("hh:mm");
-        //String strDate = dateFormat.format(new Date());
-
-        //Lectura lectura = new Lectura(new Date() ,peso,diastolica,sistolica);
-        //lecturaServices.create(lectura);
-
-        //Vamos a instanciar un intent
-
-        //Intent intent = new Intent(this, MainActivity.class);
-
-        //Vamor a instanciar un activity
-
-        //startActivity(intent);
-
-    }
-    public void buscarId(View view){
-        //comprobamos
-
-        Log.d("INFO","ENTRAMOS EN Busqueda Id");
-
-
-        //Lectura lectura = lecturaServices.read(4);
-
-        //Log.d("INFO", lectura.toString());
-
-        //lecturaServices.delete(4);
-
-        //Vamos a instanciar un intent
-
-        //Intent intent = new Intent(this, MainActivity.class);
-
-        //Vamor a instanciar un activity
-
-        //startActivity(intent);
-
     }
 }
