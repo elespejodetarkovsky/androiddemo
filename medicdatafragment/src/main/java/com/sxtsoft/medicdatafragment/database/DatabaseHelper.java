@@ -29,7 +29,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_5 = "LONGITUD";
     private static final String COL_6 = "LATITUD";
 
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
+    //private static final SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);

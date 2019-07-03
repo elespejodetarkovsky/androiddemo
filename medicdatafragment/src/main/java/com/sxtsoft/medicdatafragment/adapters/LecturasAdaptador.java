@@ -17,48 +17,51 @@ import com.sxtsoft.medicdatafragment.model.LecturaServicesSQLite;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class Adaptador extends BaseAdapter {
+public class LecturasAdaptador extends BaseAdapter {
+
+    private static final SimpleDateFormat SDF_FECHA = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat SDF_HORA = new SimpleDateFormat("HH:mm");
 
     private LayoutInflater inflater = null;
     private List<Lectura> lecturas;
     private Context contexto;
-    private LecturaServices lecturaServicesSQLite;
 
-    public Adaptador(Context contexto){
+    public LecturasAdaptador(Context contexto){
+
         this.contexto = contexto;
         inflater = (LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
-        lecturaServicesSQLite = new LecturaServicesSQLite(contexto);
-        lecturas = lecturaServicesSQLite.getAll();
+
+        LecturaServices lecturaServices = new LecturaServicesSQLite(contexto);
+        lecturas = lecturaServices.getAll();
+
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final View vista = inflater.inflate(R.layout.listadofragment, null);
 
-        //recoger todas las vista de ese layout...
-        SimpleDateFormat adf = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat adf2 = new SimpleDateFormat("HH");
+        final View vista = inflater.inflate(R.layout.lectura_row, null);
 
-
+        TextView peso = (TextView) vista.findViewById(R.id.idPeso);
         TextView diastolica = (TextView) vista.findViewById(R.id.idDiastolica);
         TextView sistolica = (TextView) vista.findViewById(R.id.idSiastolica);
         TextView fecha = (TextView) vista.findViewById(R.id.idFecha);
-        TextView peso = (TextView) vista.findViewById(R.id.idEntradaPeso);
-        TextView parteDia = (TextView) vista.findViewById(R.id.idParteDelDia);
+        TextView parteDelDia = (TextView) vista.findViewById(R.id.idParteDelDia);
 
-        Lectura lectura = lecturas.get(position); //ex i
+        Lectura lectura = lecturas.get(position);
 
-        diastolica.setText(String.valueOf(lectura.getDiastolica()) + " mmHg");
-        sistolica.setText(String.valueOf(lectura.getSistolica()) + " mmHg");
-        fecha.setText(String.valueOf(adf.format(lectura.getFechaHora())));
+        peso.setText(String.valueOf(lectura.getPeso()));
+        diastolica.setText(String.valueOf(lectura.getDiastolica()));
+        sistolica.setText(String.valueOf(lectura.getSistolica()));
+
+        fecha.setText(SDF_FECHA.format(lectura.getFechaHora()));
 
         //indago en que parte del día se ha hecho la toma
-        Integer intHora = Integer.valueOf(adf2.format(lectura.getFechaHora()));
+        Integer intHora = Integer.valueOf(SDF_HORA.format(lectura.getFechaHora()));
 
         if (intHora > 12){
-            parteDia.setText("Despues Mediodia");
+            parteDelDia.setText("Despues Mediodia");
         }else{
-            parteDia.setText("Antes Mediodia");
+            parteDelDia.setText("Antes Mediodia");
         }
 
         Log.d("INFO","**Minutos: " + intHora);
@@ -72,8 +75,8 @@ public class Adaptador extends BaseAdapter {
             vista.setBackgroundColor(Color.WHITE);
         }
         return vista;
-    }
 
+    }
 
     @Override
     public int getCount() {
@@ -82,12 +85,12 @@ public class Adaptador extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return lecturas.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return lecturas.get(position).getCodigo();
     }
 
 }

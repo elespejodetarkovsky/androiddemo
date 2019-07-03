@@ -116,7 +116,7 @@
         app:layout_constraintVertical_bias="0.12" />
 
     <TextView
-        android:id="@+id/idEntradaPeso"
+        android:id="@+id/idPeso"
         android:layout_width="50dp"
         android:layout_height="17dp"
         android:layout_marginTop="8dp"

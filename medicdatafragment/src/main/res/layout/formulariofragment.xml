@@ -36,7 +36,7 @@
             app:layout_constraintGuide_begin="311dp" />
 
         <EditText
-            android:id="@+id/idEntradaPeso"
+            android:id="@+id/idPeso"
             android:layout_width="70dp"
             android:layout_height="45dp"
             android:layout_marginStart="8dp"

@@ -2,7 +2,6 @@ package com.sxtsoft.medicdatafragment;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,14 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-
-import com.sxtsoft.medicdatafragment.ComunicaMenu;
 
 
 public class MenuFragment extends Fragment {
 
-    // referencias a los tres botones
+    // referencias a los tres botones, constantes...
     private final int[] BOTONES_MENU = {R.id.boton1,
             R.id.boton2,
             R.id.boton3};
@@ -66,9 +62,6 @@ public class MenuFragment extends Fragment {
                     // Hemos de invocar al método .menu(boton) de la actividad actual.
                     // Pero para ello, la actividad la hemos de tratar como ComunicaMenu
                     // Por eso hacemos el casting...
-
-                    ComunicaMenu cm = (ComunicaMenu) actividadActual;
-                    cm.menu(BOTON);
 
 
 
