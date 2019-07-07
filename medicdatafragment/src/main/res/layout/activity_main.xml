@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".FormularioActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <!-- El menú de botones es el fragmento fijo -->
 
     <fragment
         android:layout_width="match_parent"
@@ -15,11 +17,14 @@
         tools:layout="@layout/fragment_menu">
     </fragment>
 
+    <!--contenedor en el que cambiarán los fragmentos... -->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:id="@+id/destino">
     </RelativeLayout>
+
 
 </LinearLayout>

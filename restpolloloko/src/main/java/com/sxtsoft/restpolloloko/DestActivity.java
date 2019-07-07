@@ -1,5 +1,6 @@
 package com.sxtsoft.restpolloloko;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,12 +61,18 @@ public class DestActivity extends AppCompatActivity {
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
+        //Recibo los extras del intent
+        //Intent intent = getIntent();
+
+        //Defino un Bundle
+        //Bundle d = intent.getExtras();
+
+        //textViewResult.setText(d.getString("LISTA"));
         getCamareros();
-        //getProductos();
     }
 
-
     private void getCamareros() {
+
         Call<List<Camarero>> call = jsonPlaceHolderApi.getCamareros();
 
         call.enqueue(new Callback<List<Camarero>>() {
@@ -74,7 +81,7 @@ public class DestActivity extends AppCompatActivity {
 
                 if (!response.isSuccessful()) {
                     Log.d("**", "Ha habido un problema");
-                    textViewResult.setText("Code: " + response.code());
+                    //textViewResult.setText("Code: " + response.code());
                     return;
                 }
 
@@ -82,13 +89,17 @@ public class DestActivity extends AppCompatActivity {
 
                 for (Camarero camarero : camareros) {
                     String content = "";
+                    content = "prueba";
                     content += "codigo: " + camarero.getCodigo() + "\n";
                     content += "nombre: " + camarero.getNombre() + "\n";
 
                     Log.d("**", content);
                     textViewResult.append(content);
 
+
+
                 }
+
             }
 
             @Override
@@ -96,46 +107,6 @@ public class DestActivity extends AppCompatActivity {
                 Log.d("**", "Eroor no determinado");
             }
         });
-    }
-
-    private void getProductos(){
-        Call<List<Producto>> call = jsonPlaceHolderApi.getProducto();
-
-        call.enqueue(new Callback<List<Producto>>() {
-            @Override
-            public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
-
-                if (!response.isSuccessful()){
-                    Log.d("**", "Ha habido un problema");
-                    //textViewResult.setText("Code: " + response.code());
-                    return;
-                }
-
-                List<Producto> productos = response.body();
-
-                for (Producto producto:productos ){
-                    String content ="";
-                    content += "codigo: " + producto.getCodigo() + "\n";
-                    content += "nombre: " + producto.getNombre() + "\n";
-                    content += "precio: " + producto.getPrecio() + "\n";
-                    content += "descripcion: " + producto.getDescripcion() + "\n";
-                    content += "fecha alta: " + producto.getFechaAlta() + "\n";
-                    content += "descatalogado: " + producto.isDescatalogado() + "\n";
-                    content += "categoria: " + producto.getCategoria() + "\n\n";
-
-
-                    Log.d("**" ,content);
-                    textViewResult.append(content);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Producto>> call, Throwable t) {
-                Log.d("**","Eroor no determinado");
-            }
-        });
-
     }
 
 

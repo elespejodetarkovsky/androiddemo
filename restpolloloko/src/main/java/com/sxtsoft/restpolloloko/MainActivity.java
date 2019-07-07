@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button botonPedidos;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
+    //private String content; //pasaré el texto a utilizando un bundle para el DestActivity
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,50 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         botonProductos.setOnClickListener(this);
         botonPedidos.setOnClickListener(this);
 
-        // Añadimos un listener a cada uno de los botones...
-//        botonCamareros.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                Log.d("**","pulsamos y enviamos info del boton Camareros");
-//
-//                //Vamos a instanciar un intent
-//
-//                Intent intent = new Intent(v.getContext(), DestActivity.class);
-//
-//                //Vamor a instanciar un activity
-//
-//                startActivity(intent);
-//                //getCamareros();
-//
-//            }
-//        });
-//        botonProductos.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                Log.d("**","pulsamos y enviamos info del boton Productos");
-//                getProductos();
-//
-//
-//            }
-//        });
-//        botonPedidos.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                Log.d("**","pulsamos y enviamos info del boton Pedidos");
-//                getPedidos();
-//
-//
-//            }
-//        });
+
         // Creates the json object which will manage the information received
         GsonBuilder builder = new GsonBuilder();
 
@@ -122,6 +81,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
+    }
+
+    private void getCamareros() {
+
+        Call<List<Camarero>> call = jsonPlaceHolderApi.getCamareros();
+
+        call.enqueue(new Callback<List<Camarero>>() {
+            @Override
+            public void onResponse(Call<List<Camarero>> call, Response<List<Camarero>> response) {
+
+                if (!response.isSuccessful()) {
+                    Log.d("**", "Ha habido un problema");
+                    //textViewResult.setText("Code: " + response.code());
+                    return;
+                }
+
+                List<Camarero> camareros = response.body();
+
+                for (Camarero camarero : camareros) {
+                    String content = "";
+                    content = "prueba";
+                    content += "codigo: " + camarero.getCodigo() + "\n";
+                    content += "nombre: " + camarero.getNombre() + "\n";
+
+                    Log.d("**", content);
+                    //textViewResult.append(content);
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Camarero>> call, Throwable t) {
+                Log.d("**", "Eroor no determinado");
+            }
+        });
     }
 
     private void getProductos(){
@@ -213,13 +210,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case "0": //camareros
                 Log.d("**","pulsamos y enviamos info del boton Camareros");
 
+
                 //Vamos a instanciar un intent
 
                 Intent intent = new Intent(v.getContext(), DestActivity.class);
 
+
                 //Vamor a instanciar un activity
 
                 startActivity(intent);
+
                 break;
 
             case "1": //productos
