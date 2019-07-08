@@ -12,10 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".DestPedidos"
+            android:label="@string/title_activity_dest_pedidos"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".CrearProducto"
+            android:label="@string/title_activity_crear_producto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CrearCamarero"
+            android:label="@string/title_activity_crear_camarero"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".DestProductos"
             android:label="@string/title_activity_dest_productos"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".DestActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DestCamareros" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

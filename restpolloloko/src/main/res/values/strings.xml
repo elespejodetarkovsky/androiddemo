@@ -4,4 +4,17 @@
     <string name="productos">Productos</string>
     <string name="pedidos">Pedidos</string>
     <string name="title_activity_dest_productos">DestProductos</string>
+    <string name="title_activity_crear_camarero">CrearCamarero</string>
+    <string name="title_activity_crear_producto">CrearProducto</string>
+    <string name="title_activity_dest_pedidos">DestPedidos</string>
+    <string name="crearCamarero">Crear Camarero</string>
+    <string name="altaCamarero">alta Camarero</string>
+    <string name="altaProducto">Alta Producto</string>
+    <string name="nombreCamarero">name</string>
+    <string name="idCamarero" />
+    <string name="mostrarCamareros">Mostar Camareros</string>
+    <string name="crearNombreProducto" />
+    <string name="crearPrecioProducto" />
+    <string name="crearDescripcionProducto" />
+    <string name="crearFechaProducto" />
 </resources>

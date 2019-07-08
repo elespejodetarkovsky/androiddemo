@@ -11,6 +11,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -26,8 +27,13 @@ public interface JsonPlaceHolderApi {
     @GET("pedidos")
     Call<List<Pedido>> getPedido(); //(@Query("userId") int userId);
 
-//    @POST("Posts")
-//    Call<Post> createPost(@Body Post post);
+    @Headers("Content-type:application/json")
+    @POST("camareros")
+    Call<Camarero> createPost(@Body Camarero camarero);
+
+    @Headers("Content-type:application/json")
+    @POST("productos")
+    Call<Producto> createPost(@Body Producto productos);
 
 
 }
