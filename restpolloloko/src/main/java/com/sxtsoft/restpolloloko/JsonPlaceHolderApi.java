@@ -1,6 +1,7 @@
 package com.sxtsoft.restpolloloko;
 
 import com.sxtsoft.restpolloloko.model.Camarero;
+import com.sxtsoft.restpolloloko.model.LineaPedido;
 import com.sxtsoft.restpolloloko.model.Pedido;
 import com.sxtsoft.restpolloloko.model.Producto;
 
@@ -26,6 +27,9 @@ public interface JsonPlaceHolderApi {
 
     @GET("pedidos")
     Call<List<Pedido>> getPedido(); //(@Query("userId") int userId);
+
+    @GET("lineas")
+    Call<List<LineaPedido>> getLineaPedido(); //(@Query("userId") int userId);
 
     @Headers("Content-type:application/json")
     @POST("camareros")

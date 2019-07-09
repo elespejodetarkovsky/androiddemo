@@ -14,6 +14,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.sxtsoft.restpolloloko.model.Camarero;
 import com.sxtsoft.restpolloloko.model.Producto;
+import com.sxtsoft.restpolloloko.model.RetrofitHelper;
 
 import java.lang.reflect.Type;
 import java.util.Date;
@@ -37,37 +38,9 @@ public class DestCamareros extends AppCompatActivity {
 
         textViewResult = (TextView) findViewById(R.id.text_view_result);
 
-        // Creates the json object which will manage the information received
-        GsonBuilder builder = new GsonBuilder();
 
-        // Register an adapter to manage the date types as long values
-        builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+        jsonPlaceHolderApi = RetrofitHelper.getJsonPlaceHolderApi();
 
-            @Override
-            public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                Log.d("** getAsJsonPrimitive:", json.getAsJsonPrimitive().toString());
-                long millisecons = json.getAsJsonPrimitive().getAsLong();
-                return new Date(millisecons);
-            }
-        });
-
-        Gson gson = builder.create();
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://pedi-gest.herokuapp.com/api/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
-        //Recibo los extras del intent
-        //Intent intent = getIntent();
-
-        //Defino un Bundle
-        //Bundle d = intent.getExtras();
-
-        //textViewResult.setText(d.getString("LISTA"));
         getCamareros();
     }
 

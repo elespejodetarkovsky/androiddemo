@@ -17,4 +17,5 @@
     <string name="crearPrecioProducto" />
     <string name="crearDescripcionProducto" />
     <string name="crearFechaProducto" />
+    <string name="lineapedido">Linea Pedido</string>
 </resources>

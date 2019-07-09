@@ -18,12 +18,16 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.sxtsoft.restpolloloko.model.Camarero;
+import com.sxtsoft.restpolloloko.model.LineaPedido;
 import com.sxtsoft.restpolloloko.model.Pedido;
 import com.sxtsoft.restpolloloko.model.Producto;
+import com.sxtsoft.restpolloloko.model.RetrofitHelper;
 
 import java.lang.reflect.Type;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button botonPedidos;
     private Button botonCrearCamarero;
     private Button botonCrearProducto;
+    private Button botonLineasPedidos;
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         botonPedidos = (Button) findViewById(R.id.idbtnPedidos);
         botonCrearCamarero = (Button) findViewById((R.id.btnAltaCamarero));
         botonCrearProducto = (Button) findViewById((R.id.btnAltaProducto));
+        botonLineasPedidos = (Button) findViewById(R.id.btnLineasPedidos);
 
 
         botonCamareros.setOnClickListener(this);
@@ -61,44 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         botonPedidos.setOnClickListener(this);
         botonCrearProducto.setOnClickListener(this);
         botonCrearCamarero.setOnClickListener(this);
+        botonLineasPedidos.setOnClickListener(this);
 
+        jsonPlaceHolderApi = RetrofitHelper.getJsonPlaceHolderApi();
 
-        // Creates the json object which will manage the information received
-        GsonBuilder builder = new GsonBuilder();
-
-        // Register an adapter to manage the date types as long values
-        builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-
-            @Override
-            public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                Log.d("** getAsJsonPrimitive:", json.getAsJsonPrimitive().toString());
-                long millisecons = json.getAsJsonPrimitive().getAsLong();
-                return new Date(millisecons);
-            }
-
-        });
-
-        builder.registerTypeAdapter(Date.class, new JsonSerializer<Date>() {
-
-            @Override
-            public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-                long l = src.getTime();
-
-                return new JsonPrimitive(l);
-            }
-        });
-
-
-        Gson gson = builder.create();
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://pedi-gest.herokuapp.com/api/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-
-        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
     }
     private void setProducto(){
@@ -225,6 +197,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mostrarProductos();
 
                 break;
+
+            case "5": //devuelve lineas de pedidos
+                Log.d("**","pulsamos y enviamos info del boton Lineas de pedidos");
+                getLineasPedidos();
+
+                break;
         }
     }
 
@@ -249,6 +227,81 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Vamor a instanciar un activity
 
         startActivity(intent);
+
+    }
+
+    private void getLineasPedidos(){
+        final Map<String, Integer> estadisticasPedidos = new HashMap<>(); //almacenaré los valores
+
+            Call<List<LineaPedido>> call = jsonPlaceHolderApi.getLineaPedido();
+
+            call.enqueue(new Callback<List<LineaPedido>>() {
+                @Override
+                public void onResponse(Call<List<LineaPedido>> call, Response<List<LineaPedido>> response) {
+
+                    String categoriaLinea;
+                    int cantidad = 0;
+
+
+                    //voy a agregar las categorias y valores en cero...auqnue no me guste... :(
+
+                    estadisticasPedidos.put("COMIDA",0);
+                    estadisticasPedidos.put("REFRESCO",0);
+                    estadisticasPedidos.put("CERVEZA",0);
+                    estadisticasPedidos.put("CAFE",0);
+                    estadisticasPedidos.put("AGUA",0);
+                    estadisticasPedidos.put("LICOR",0);
+
+
+                    if (!response.isSuccessful()){
+                        Log.d("**", "Ha habido un problema");
+                        //textViewResult.setText("Code: " + response.code());
+                        return;
+                    }
+
+                    List<LineaPedido> lineaPedidos = response.body();
+
+                    for (LineaPedido linea:lineaPedidos ){
+                        String content ="";
+                        content += "id producto: " + linea.getProducto().getCodigo() + "\n";
+                        content += "categoria: " + linea.getProducto().getCategoria() + "\n";
+                        categoriaLinea = linea.getProducto().getCategoria();
+                        content += "cantidad: " + linea.getQt() + "\n";
+                        content += "precio: " + linea.getPrecio() + "\n";
+
+                        //me fijo si existe la categoría.
+//                        if (estadisticasPedidos.get(categoriaLinea)==null){
+//                            //la categoria no existe...la agrego
+//                            estadisticasPedidos.put(categoriaLinea,0); //inicializo la categoría
+//                        } else{
+//                            int valorAnterior = estadisticasPedidos.get(estadisticasPedidos);
+//                            cantidad =  linea.getQt() + valorAnterior;
+//
+//                            estadisticasPedidos.put(categoriaLinea, cantidad);
+//                        }
+
+                        //calculo la nueva cantidad
+                        cantidad = estadisticasPedidos.get(categoriaLinea) + linea.getQt();
+                        estadisticasPedidos.put(categoriaLinea, cantidad); //coloco la nueva cantidad...
+
+                        cantidad = 0;
+
+                        //Log.d("**" ,Integer.toString(estadisticasPedidos.get(categoriaLinea)));
+                        //textViewResult.append(content);
+
+                    }
+                    for (Map.Entry<String,Integer> linea : estadisticasPedidos.entrySet()){
+                        Log.d("**", "Key = " + linea.getKey() +
+                                ", Value = " + linea.getValue());}
+
+
+                }
+
+                @Override
+                public void onFailure(Call<List<LineaPedido>> call, Throwable t) {
+                    Log.d("**","Error no determinado" + t.getMessage());
+                }
+            });
 
     }
 }

@@ -1,7 +1,11 @@
 package com.sxtsoft.restpolloloko.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LineaPedido {
     private Producto producto;
+
+    @SerializedName("cantidad")
     private int qt;
     private double precio; //es para ofertas por ejemplos
 
