@@ -7,13 +7,13 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <fragment
+    <fragmentPrueba
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/menu"
         android:name="com.sxtsoft.fragmenthelloworld.MenuFragment"
         tools:layout="@layout/fragment_menu">
-    </fragment>
+    </fragmentPrueba>
 
     <!--contenedor en el que se pondrá el fragmento que toque -->
     <RelativeLayout

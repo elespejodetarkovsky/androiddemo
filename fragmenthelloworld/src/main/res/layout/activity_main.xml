@@ -7,13 +7,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <fragment
+    <fragmentPrueba
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/menu"
     android:name="com.sxtsoft.fragmenthelloworld.MenuFragment"
     tools:layout="@layout/fragment_menu">
-    </fragment>
+    </fragmentPrueba>
 
     <RelativeLayout
     android:layout_width="match_parent"

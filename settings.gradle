@@ -1,1 +1,1 @@
-include ':listviewpersonalizado', ':medicdata', ':sqlitehelloworld', ':nahuelillo', ':fragmenthelloworld', ':medicdatafragment', ':resthelloworld', ':restpolloloko', ':gpshelloworld1', ':medicdatav3'
+include ':listviewpersonalizado', ':medicdata', ':sqlitehelloworld', ':nahuelillo', ':fragmenthelloworld', ':medicdatafragment', ':resthelloworld', ':restpolloloko', ':gpshelloworld1', ':medicdatav3', ':settinghelloworld'

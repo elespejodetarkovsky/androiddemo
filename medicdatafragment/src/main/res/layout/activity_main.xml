@@ -9,13 +9,13 @@
 
     <!-- El menú de botones es el fragmento fijo -->
 
-    <fragment
+    <fragmentPrueba
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/menu"
         android:name="com.sxtsoft.medicdatafragment.MenuFragment"
         tools:layout="@layout/fragment_menu">
-    </fragment>
+    </fragmentPrueba>
 
     <!--contenedor en el que cambiarán los fragmentos... -->
 
