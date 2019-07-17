@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">countryflags</string>
+    <string name="capital">capital</string>
+    <string name="nombrepais">pais</string>
+</resources>
