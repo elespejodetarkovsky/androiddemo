@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">countryflagsV2</string>
+    <string name="capital">capital</string>
+    <string name="nombrepais">pais</string>
+    <string name="nativename">nom nativo</string>
+    <string name="lblLenguas">lenguas</string>
+    <string name="lblBorders">fronteras</string>
+    <string name="lblregion">region</string>
+</resources>
