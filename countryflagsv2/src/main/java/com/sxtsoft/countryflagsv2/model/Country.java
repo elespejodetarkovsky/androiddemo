@@ -2,6 +2,7 @@ package com.sxtsoft.countryflagsv2.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Country {
@@ -16,20 +17,32 @@ public class Country {
     private double area;
 
     @SerializedName("languages")
-    private Languages[] lenguas;
+    private List<Language> lenguas;
 
-    private String[] borders;
+    private List<String> borders;
     private String region;
 
     public Country(){
 
     }
 
-    public Languages[] getLenguas() {
+    public Country(String name, String alpha2Code, String capital, String nativeName, long population, double area, List<Language> lenguas, List<String> borders, String region) {
+        this.name = name;
+        this.alpha2Code = alpha2Code;
+        this.capital = capital;
+        this.nativeName = nativeName;
+        this.population = population;
+        this.area = area;
+        this.lenguas = lenguas;
+        this.borders = borders;
+        this.region = region;
+    }
+
+    public List<Language> getLenguas() {
         return lenguas;
     }
 
-    public void setLenguas(Languages[] lenguas) {
+    public void setLenguas(List<Language> lenguas) {
         this.lenguas = lenguas;
     }
 
@@ -81,11 +94,11 @@ public class Country {
         this.area = area;
     }
 
-    public String[] getBorders() {
+    public List<String> getBorders() {
         return borders;
     }
 
-    public void setBorders(String[] borders) {
+    public void setBorders(List<String> borders) {
         this.borders = borders;
     }
 
@@ -106,6 +119,9 @@ public class Country {
                 ", nativeName='" + nativeName + '\'' +
                 ", population=" + population +
                 ", area=" + area +
+                ", lenguas=" + lenguas +
+                ", borders=" + borders +
+                ", region='" + region + '\'' +
                 '}';
     }
 }
