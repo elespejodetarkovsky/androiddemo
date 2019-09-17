@@ -5,12 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.print.PrinterId;
 import android.util.Log;
 
 import com.sxtsoft.medicdata.model.Lectura;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,17 +38,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        /*  CREATE TABLE LECTURAS(
-
-           0     CODIGO      INTEGER PRIMARY KEY AUTOINCREMENT,
-           1     FECHA_HORA  TEXT NOT NULL,
-           2     PESO        REAL NOT NULL,
-           3     DIASTOLICA  REAL NOT NULL,
-           4     SISTOLICA   REAL NOT NULL,
-           5     LONGITUD    REAL,
-           6     LATITUD     REAL) */
-        //se utiliza una sola vez en la aplicacion...si ve que está
-        //la db.
 
         StringBuilder sb = new StringBuilder();
         sb.append("CREATE TABLE " + LECTURAS_TABLE + " (")
