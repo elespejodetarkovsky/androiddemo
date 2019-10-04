@@ -15,14 +15,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.sxtsoft.medicdatav3.adapter.AdaptadorLecturas;
 import com.sxtsoft.medicdatav3.model.JsonPlaceHolderApi;
 import com.sxtsoft.medicdatav3.model.Lectura;
 import com.sxtsoft.medicdatav3.model.RetrofitHelper;
 
 
 import java.util.Date;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
